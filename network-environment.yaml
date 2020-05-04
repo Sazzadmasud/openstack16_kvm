@@ -1,0 +1,76 @@
+resource_registry:
+  OS::TripleO::Controller::Net::SoftwareConfig: /home/stack/templates/nic-config/controller.yaml
+  OS::TripleO::Compute::Net::SoftwareConfig: /home/stack/templates/nic-config/compute.yaml
+  OS::TripleO::BlockStorage::Net::SoftwareConfig: /home/stack/templates/openstack-tripleo-heat-templates/network/config/multiple-nics/cinder-storage.yaml
+  OS::TripleO::ObjectStorage::Net::SoftwareConfig: /home/stack/templates/openstack-tripleo-heat-templates/network/config/multiple-nics/swift-storage.yaml
+  OS::TripleO::CephStorage::Net::SoftwareConfig: /home/stack/templates/openstack-tripleo-heat-templates/network/config/multiple-nics/ceph-storage.yaml
+
+parameter_defaults:
+  StorageNetCidr: '172.168.2.0/24'
+  # Customize the IP range to use for static IPs and VIPs
+  StorageAllocationPools: [{'start': '172.168.2.4', 'end': '172.168.2.250'}]
+  # Customize the VLAN ID to match the local environment
+  StorageNetworkVlanID: 30
+
+
+  # Customize the IP subnet to match the local environment
+  StorageMgmtNetCidr: '172.168.3.0/24'
+  # Customize the IP range to use for static IPs and VIPs
+  StorageMgmtAllocationPools: [{'start': '172.168.3.4', 'end': '172.168.3.250'}]
+  # Customize the VLAN ID to match the local environment
+  StorageMgmtNetworkVlanID: 40
+
+
+  # Customize the IP subnet to match the local environment
+  InternalApiNetCidr: '172.168.4.0/24'
+  # Customize the IP range to use for static IPs and VIPs
+  InternalApiAllocationPools: [{'start': '172.168.4.4', 'end': '172.168.4.250'}]
+  # Customize the VLAN ID to match the local environment
+  InternalApiNetworkVlanID: 20
+
+
+  # Customize the IP subnet to match the local environment
+  TenantNetCidr: '172.168.5.0/24'
+  # Customize the IP range to use for static IPs and VIPs
+  TenantAllocationPools: [{'start': '172.168.5.4', 'end': '172.168.5.250'}]
+  # Customize the VLAN ID to match the local environment
+  TenantNetworkVlanID: 50
+  # MTU of the underlying physical network. Neutron uses this value to
+  # calculate MTU for all virtual network components. For flat and VLAN
+  # networks, neutron uses this value without modification. For overlay
+  # networks such as VXLAN, neutron automatically subtracts the overlay
+  # protocol overhead from this value.
+  TenantNetPhysnetMtu: 1500
+
+
+  # Customize the IP subnet to match the local environment
+  ExternalNetCidr: '192.168.4.0/24'
+  # Customize the IP range to use for static IPs and VIPs
+  # Leave room if the external network is also used for floating IPs
+  ExternalAllocationPools: [{'start': '192.168.4.40', 'end': '192.168.4.250'}]
+  # Gateway router for routable networks
+  ExternalInterfaceDefaultRoute: '192.168.4.1'
+  # Customize the VLAN ID to match the local environment
+  ExternalNetworkVlanID: 10
+
+
+#  # Customize the IP subnet to match the local environment
+#  ManagementNetCidr: '10.0.1.0/24'
+#  # Customize the IP range to use for static IPs and VIPs
+#  ManagementAllocationPools: [{'start': '10.0.1.4', 'end': '10.0.1.250'}]
+#  # Gateway router for routable networks
+#  ManagementInterfaceDefaultRoute: '10.0.1.1'
+#  # Customize the VLAN ID to match the local environment
+#  ManagementNetworkVlanID: 60
+  CloudName: overcloud.madhouse.local
+  # Define the DNS servers (maximum 2) for the overcloud nodes
+  # When the list is not set or empty, the nameservers on the ctlplane subnets will be used.
+  # (ctlplane subnets nameservers are controlled by the ``undercloud_nameservers`` option in ``undercloud.conf``)
+  DnsServers: [192.168.4.1]
+  # List of Neutron network types for tenant networks (will be used in order)
+  NeutronNetworkType: 'geneve,vlan'
+  # Neutron VLAN ranges per network, for example 'datacentre:1:499,tenant:500:1000':
+  NeutronNetworkVLANRanges: 'datacentre:1:1000'
+  # Customize bonding options, e.g. "mode=4 lacp_rate=1 updelay=1000 miimon=100"
+  # for Linux bonds w/LACP, or "bond_mode=active-backup" for OVS active/backup.
+  BondInterfaceOvsOptions: "bond_mode=active-backup"

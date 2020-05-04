@@ -1,0 +1,26 @@
+Exception occured while running the command
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/tripleoclient/command.py", line 32, in run
+    super(Command, self).run(parsed_args)
+  File "/usr/lib/python3.6/site-packages/osc_lib/command/command.py", line 41, in run
+    return super(Command, self).run(parsed_args)
+  File "/usr/lib/python3.6/site-packages/cliff/command.py", line 185, in run
+    return_code = self.take_action(parsed_args) or 0
+  File "/usr/lib/python3.6/site-packages/tripleoclient/v1/overcloud_deploy.py", line 955, in take_action
+    self._deploy_tripleo_heat_templates_tmpdir(stack, parsed_args)
+  File "/usr/lib/python3.6/site-packages/tripleoclient/v1/overcloud_deploy.py", line 374, in _deploy_tripleo_heat_templates_tmpdir
+    new_tht_root, tht_root)
+  File "/usr/lib/python3.6/site-packages/tripleoclient/v1/overcloud_deploy.py", line 450, in _deploy_tripleo_heat_templates
+    cleanup=(not parsed_args.no_cleanup))
+  File "/usr/lib/python3.6/site-packages/tripleoclient/utils.py", line 1116, in process_multiple_environments
+    env_path=env_path)
+  File "/usr/lib/python3.6/site-packages/heatclient/common/template_utils.py", line 314, in process_environment_and_files
+    env = environment_format.parse(raw_env)
+  File "/usr/lib/python3.6/site-packages/heatclient/common/environment_format.py", line 50, in parse
+    raise ValueError(_('The environment is not a valid '
+ValueError: The environment is not a valid YAML mapping data type.
+The environment is not a valid YAML mapping data type.
+Creating Swift container to store the plan
+Creating plan from template files in: /tmp/tripleoclient-0l0ke3z4/tripleo-heat-templates
+Plan created.
+Processing templates in the directory /tmp/tripleoclient-0l0ke3z4/tripleo-heat-templates

@@ -1,0 +1,819 @@
+WARNING: Following parameter(s) are defined but not currently used in the deployment plan. These parameters may be valid but not in use due to the service or deployment configuration. AlertManagerContainerImage, CephPoolDefaultPgNum, CephPoolDefaultSize, GnocchiMetricdWorkers, GrafanaContainerImage, ManilaCephFSDataPoolPGNum, ManilaCephFSMetadataPoolPGNum, NodeExporterContainerImage, PrometheusContainerImage, RootStackName, SaharaWorkers
+Warning: Permanently added '172.168.1.7' (ECDSA) to the list of known hosts.
+Warning: Permanently added '172.168.1.9' (ECDSA) to the list of known hosts.
+Warning: Permanently added '172.168.1.7' (ECDSA) to the list of known hosts.
+Warning: Permanently added '172.168.1.9' (ECDSA) to the list of known hosts.
+Waiting for messages on queue 'tripleo' with no timeout.
+Removing the current plan files
+Uploading new plan files
+Temporary Swift GET/PUT URL parameters have successfully been updated.
+Temporary Swift GET/PUT URL parameters have successfully been updated.
+The backup of the ceph-ansible fetch directory did not need to be renamed
+Plan updated.
+Processing templates in the directory /tmp/tripleoclient-4io1wkh_/tripleo-heat-templates
+Deploying templates in the directory /tmp/tripleoclient-4io1wkh_/tripleo-heat-templates
+Initializing director plan deployment
+Creating director Heat stack
+
+ Stack director/68bf7629-c24c-46fa-a3e3-12c2dc131e4d CREATE_COMPLETE 
+
+Deploying overcloud configuration
+Enabling ssh admin (tripleo-admin) for hosts:
+172.168.1.7 172.168.1.9
+Using ssh user heat-admin for initial connection.
+Using ssh key at /home/stack/.ssh/id_rsa for initial connection.
+Inserting TripleO short term key for 172.168.1.7
+Inserting TripleO short term key for 172.168.1.9
+Starting ssh admin enablement workflow
+ssh admin enablement workflow - RUNNING.
+ssh admin enablement workflow - RUNNING.
+ssh admin enablement workflow - COMPLETE.
+Removing TripleO short term key from 172.168.1.7
+Removing TripleO short term key from 172.168.1.9
+Removing short term keys locally
+Enabling ssh admin - COMPLETE.
+Config downloaded at /var/lib/mistral/director
+Inventory generated at /var/lib/mistral/director/tripleo-ansible-inventory.yaml
+Running ansible playbook at /var/lib/mistral/director/deploy_steps_playbook.yaml. See log file at /var/lib/mistral/director/ansible.log for progress. ...
+
+[WARNING]: Could not match supplied host pattern, ignoring: BlockStorage
+[WARNING]: Could not match supplied host pattern, ignoring: ObjectStorage
+[WARNING]: Could not match supplied host pattern, ignoring: CephStorage
+
+PLAY [Gather facts from undercloud] ********************************************
+
+PLAY [Gather facts from overcloud] *********************************************
+
+PLAY [Load global variables] ***************************************************
+
+TASK [include_vars] ************************************************************
+Thursday 16 April 2020  23:29:37 -0400 (0:00:00.095)       0:00:00.095 ******** 
+ok: [undercloud]
+ok: [director-novacompute-0]
+ok: [director-controller-0]
+
+PLAY [Render all_nodes data as group_vars for overcloud] ***********************
+
+TASK [Render all_nodes data as group_vars for overcloud] ***********************
+Thursday 16 April 2020  23:29:37 -0400 (0:00:00.321)       0:00:00.416 ******** 
+ok: [director-novacompute-0 -> localhost]
+
+PLAY [Set all_nodes data as group_vars for overcloud] **************************
+
+TASK [Set all_nodes data as group_vars for overcloud] **************************
+Thursday 16 April 2020  23:29:42 -0400 (0:00:04.801)       0:00:05.218 ******** 
+ok: [director-novacompute-0]
+ok: [director-controller-0]
+
+PLAY [Manage SELinux] **********************************************************
+
+TASK [Set selinux state] *******************************************************
+Thursday 16 April 2020  23:29:42 -0400 (0:00:00.180)       0:00:05.398 ******** 
+changed: [director-novacompute-0]
+changed: [director-controller-0]
+ok: [undercloud]
+
+PLAY [Common roles for TripleO servers] ****************************************
+
+TASK [Common roles for TripleO servers] ****************************************
+Thursday 16 April 2020  23:29:44 -0400 (0:00:01.494)       0:00:06.893 ******** 
+ok: [director-novacompute-0 -> localhost] => {
+    "msg": "Use --start-at-task \"Common roles for TripleO servers\" to resume from this task"
+}
+
+TASK [tripleo-bootstrap : Gather variables for each operating system] **********
+Thursday 16 April 2020  23:29:44 -0400 (0:00:00.115)       0:00:07.008 ******** 
+[DEPRECATION WARNING]: Use errors="ignore" instead of skip. This feature will 
+be removed in version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+ok: [director-novacompute-0] => (item=/usr/share/ansible/roles/tripleo-bootstrap/vars/redhat-8.yml)
+[DEPRECATION WARNING]: Use errors="ignore" instead of skip. This feature will 
+be removed in version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+ok: [director-controller-0] => (item=/usr/share/ansible/roles/tripleo-bootstrap/vars/redhat-8.yml)
+
+TASK [tripleo-bootstrap : Deploy required packages to bootstrap TripleO] *******
+Thursday 16 April 2020  23:29:44 -0400 (0:00:00.190)       0:00:07.198 ******** 
+ok: [director-controller-0]
+ok: [director-novacompute-0]
+
+TASK [tripleo-bootstrap : Create /var/lib/heat-config/tripleo-config-download directory for deployment data] ***
+Thursday 16 April 2020  23:29:46 -0400 (0:00:02.074)       0:00:09.273 ******** 
+changed: [director-novacompute-0]
+changed: [director-controller-0]
+
+TASK [tripleo-bootstrap : Deploy network-scripts required for deprecated network service] ***
+Thursday 16 April 2020  23:29:47 -0400 (0:00:00.516)       0:00:09.789 ******** 
+ok: [director-novacompute-0]
+ok: [director-controller-0]
+
+TASK [tripleo-bootstrap : Ensure network service is enabled] *******************
+Thursday 16 April 2020  23:29:48 -0400 (0:00:00.957)       0:00:10.746 ******** 
+ok: [director-novacompute-0]
+ok: [director-controller-0]
+
+TASK [tripleo-bootstrap : Symlink puppet modules under /etc/puppet/modules] ****
+Thursday 16 April 2020  23:29:49 -0400 (0:00:00.804)       0:00:11.551 ******** 
+[WARNING]: Consider using the file module with state=link rather than running
+'ln'.  If you need to use command because file is insufficient you can add
+'warn: false' to this command task or set 'command_warnings=False' in
+ansible.cfg to get rid of this message.
+changed: [director-novacompute-0]
+changed: [director-controller-0]
+
+TASK [tripleo-bootstrap : Create empty ruleset in /etc/sysconfig/iptables and /etc/sysconfig/ip6tables] ***
+Thursday 16 April 2020  23:29:49 -0400 (0:00:00.471)       0:00:12.023 ******** 
+changed: [director-novacompute-0] => (item=/etc/sysconfig/iptables)
+changed: [director-controller-0] => (item=/etc/sysconfig/iptables)
+changed: [director-novacompute-0] => (item=/etc/sysconfig/ip6tables)
+changed: [director-controller-0] => (item=/etc/sysconfig/ip6tables)
+
+TASK [tripleo-bootstrap : Check if /usr/bin/ansible-playbook exists] ***********
+Thursday 16 April 2020  23:29:51 -0400 (0:00:01.633)       0:00:13.656 ******** 
+ok: [director-novacompute-0]
+ok: [director-controller-0]
+
+TASK [tripleo-bootstrap : Check if /usr/bin/ansible-playbook-3 exists] *********
+Thursday 16 April 2020  23:29:51 -0400 (0:00:00.365)       0:00:14.021 ******** 
+ok: [director-novacompute-0]
+ok: [director-controller-0]
+
+TASK [tripleo-bootstrap : Symlink /usr/local/bin/ansible-playbook to /usr/bin/ansible-playbook-3] ***
+Thursday 16 April 2020  23:29:51 -0400 (0:00:00.339)       0:00:14.360 ******** 
+skipping: [director-novacompute-0]
+skipping: [director-controller-0]
+
+TASK [tripleo-bootstrap : Symlink /usr/local/bin/ansible-playbook-3 to /usr/bin/ansible-playbook] ***
+Thursday 16 April 2020  23:29:52 -0400 (0:00:00.190)       0:00:14.550 ******** 
+ok: [director-novacompute-0]
+ok: [director-controller-0]
+
+TASK [tripleo-ssh-known-hosts : Create temporary file for ssh_known_hosts] *****
+Thursday 16 April 2020  23:29:52 -0400 (0:00:00.394)       0:00:14.945 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [tripleo-ssh-known-hosts : Check for ssh_known_hosts file] ****************
+Thursday 16 April 2020  23:29:52 -0400 (0:00:00.446)       0:00:15.392 ******** 
+ok: [director-novacompute-0]
+ok: [director-controller-0]
+
+TASK [tripleo-ssh-known-hosts : Create a temporary copy of ssh_known_hosts] ****
+Thursday 16 April 2020  23:29:53 -0400 (0:00:00.354)       0:00:15.746 ******** 
+skipping: [director-novacompute-0]
+skipping: [director-controller-0]
+
+TASK [tripleo-ssh-known-hosts : Write temporary file] **************************
+Thursday 16 April 2020  23:29:53 -0400 (0:00:00.187)       0:00:15.934 ******** 
+skipping: [director-novacompute-0]
+skipping: [director-controller-0]
+
+TASK [tripleo-ssh-known-hosts : Set ssh_known_hosts fact] **********************
+Thursday 16 April 2020  23:29:53 -0400 (0:00:00.189)       0:00:16.123 ******** 
+ok: [director-novacompute-0]
+
+TASK [tripleo-ssh-known-hosts : Add host keys to temporary ssh_known_hosts] ****
+Thursday 16 April 2020  23:29:55 -0400 (0:00:01.678)       0:00:17.801 ******** 
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+changed: [director-novacompute-0]
+changed: [director-controller-0]
+
+TASK [tripleo-ssh-known-hosts : In-place update of /etc/ssh_known_hosts] *******
+Thursday 16 April 2020  23:29:55 -0400 (0:00:00.399)       0:00:18.200 ******** 
+changed: [director-novacompute-0]
+changed: [director-controller-0]
+
+TASK [tripleo-ssh-known-hosts : Remove temp file] ******************************
+Thursday 16 April 2020  23:29:56 -0400 (0:00:00.356)       0:00:18.557 ******** 
+changed: [director-novacompute-0]
+changed: [director-controller-0]
+
+PLAY [Overcloud deploy step tasks for step 0] **********************************
+
+TASK [include_tasks] ***********************************************************
+Thursday 16 April 2020  23:29:56 -0400 (0:00:00.381)       0:00:18.938 ******** 
+included: /var/lib/mistral/director/deploy_steps_tasks_step_0.yaml for director-controller-0, director-novacompute-0
+
+TASK [Deploy step tasks for step 0] ********************************************
+Thursday 16 April 2020  23:29:56 -0400 (0:00:00.326)       0:00:19.264 ******** 
+ok: [director-controller-0 -> localhost] => {
+    "msg": "Use --start-at-task 'Deploy step tasks for step 0' to resume from this task"
+}
+
+TASK [Ensure /var/log/journal exists] ******************************************
+Thursday 16 April 2020  23:29:56 -0400 (0:00:00.120)       0:00:19.384 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [Create /var/lib/container-puppet] ****************************************
+Thursday 16 April 2020  23:29:57 -0400 (0:00:00.441)       0:00:19.826 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [Write container-puppet.py] ***********************************************
+Thursday 16 April 2020  23:29:57 -0400 (0:00:00.366)       0:00:20.192 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [Write container-puppet.sh] ***********************************************
+Thursday 16 April 2020  23:29:58 -0400 (0:00:00.708)       0:00:20.900 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [Check for Controller/deploy_steps_tasks_step0.yaml] **********************
+Thursday 16 April 2020  23:29:59 -0400 (0:00:00.708)       0:00:21.609 ******** 
+ok: [director-controller-0 -> localhost]
+
+TASK [include_tasks] ***********************************************************
+Thursday 16 April 2020  23:29:59 -0400 (0:00:00.271)       0:00:21.880 ******** 
+skipping: [director-novacompute-0]
+included: /var/lib/mistral/director/Controller/deploy_steps_tasks_step0.yaml for director-controller-0
+
+TASK [Configure tuned before reboot] *******************************************
+Thursday 16 April 2020  23:29:59 -0400 (0:00:00.271)       0:00:22.151 ******** 
+
+TASK [tuned : Gather variables for each operating system] **********************
+Thursday 16 April 2020  23:29:59 -0400 (0:00:00.206)       0:00:22.358 ******** 
+[DEPRECATION WARNING]: Use errors="ignore" instead of skip. This feature will 
+be removed in version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+ok: [director-controller-0] => (item=/usr/share/ansible/roles/tuned/vars/redhat.yml)
+
+TASK [tuned : include_tasks] ***************************************************
+Thursday 16 April 2020  23:30:00 -0400 (0:00:00.120)       0:00:22.479 ******** 
+included: /usr/share/ansible/roles/tuned/tasks/tuned_install.yml for director-controller-0
+
+TASK [tuned : Install tuned] ***************************************************
+Thursday 16 April 2020  23:30:00 -0400 (0:00:00.185)       0:00:22.665 ******** 
+ok: [director-controller-0]
+
+TASK [tuned : Check for tuned-adm] *********************************************
+Thursday 16 April 2020  23:30:01 -0400 (0:00:00.833)       0:00:23.498 ******** 
+ok: [director-controller-0]
+
+TASK [tuned : include_tasks] ***************************************************
+Thursday 16 April 2020  23:30:01 -0400 (0:00:00.272)       0:00:23.771 ******** 
+included: /usr/share/ansible/roles/tuned/tasks/tuned_config.yml for director-controller-0
+
+TASK [tuned : Ensure profile directory exists] *********************************
+Thursday 16 April 2020  23:30:01 -0400 (0:00:00.192)       0:00:23.964 ******** 
+skipping: [director-controller-0]
+
+TASK [tuned : Create custom tuned profile] *************************************
+Thursday 16 April 2020  23:30:01 -0400 (0:00:00.131)       0:00:24.095 ******** 
+skipping: [director-controller-0]
+
+TASK [tuned : Check tuned active profile] **************************************
+Thursday 16 April 2020  23:30:01 -0400 (0:00:00.116)       0:00:24.211 ******** 
+ok: [director-controller-0]
+
+TASK [tuned : Check Tuned Configuration file exists] ***************************
+Thursday 16 April 2020  23:30:02 -0400 (0:00:00.433)       0:00:24.644 ******** 
+ok: [director-controller-0]
+
+TASK [tuned : Fail if tuned profile conf is absent but isolated cores is provided] ***
+Thursday 16 April 2020  23:30:02 -0400 (0:00:00.277)       0:00:24.922 ******** 
+[DEPRECATION WARNING]: evaluating  as a bare variable, this behaviour will go 
+away and you might need to add |bool to the expression in the future. Also see 
+CONDITIONAL_BARE_VARS configuration toggle.. This feature will be removed in 
+version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+skipping: [director-controller-0]
+
+TASK [tuned : Configure isolated cores for profile throughput-performance] *****
+Thursday 16 April 2020  23:30:02 -0400 (0:00:00.129)       0:00:25.051 ******** 
+[DEPRECATION WARNING]: evaluating  as a bare variable, this behaviour will go 
+away and you might need to add |bool to the expression in the future. Also see 
+CONDITIONAL_BARE_VARS configuration toggle.. This feature will be removed in 
+version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+skipping: [director-controller-0]
+
+TASK [tuned : Enable tuned profile] ********************************************
+Thursday 16 April 2020  23:30:02 -0400 (0:00:00.116)       0:00:25.168 ******** 
+changed: [director-controller-0]
+
+TASK [Configure kernel args and reboot] ****************************************
+Thursday 16 April 2020  23:30:04 -0400 (0:00:01.438)       0:00:26.606 ******** 
+
+TASK [tripleo-kernel : Get the command line args of the node] ******************
+Thursday 16 April 2020  23:30:04 -0400 (0:00:00.229)       0:00:26.835 ******** 
+changed: [director-controller-0]
+
+TASK [tripleo-kernel : Ensure the kernel args (  ) is present as TRIPLEO_HEAT_TEMPLATE_KERNEL_ARGS] ***
+Thursday 16 April 2020  23:30:04 -0400 (0:00:00.272)       0:00:27.108 ******** 
+skipping: [director-controller-0]
+
+TASK [tripleo-kernel : Add TRIPLEO_HEAT_TEMPLATE_KERNEL_ARGS to the GRUB_CMDLINE_LINUX parameter] ***
+Thursday 16 April 2020  23:30:04 -0400 (0:00:00.116)       0:00:27.224 ******** 
+skipping: [director-controller-0]
+
+TASK [tripleo-kernel : Generate grub config file] ******************************
+Thursday 16 April 2020  23:30:04 -0400 (0:00:00.145)       0:00:27.370 ******** 
+skipping: [director-controller-0]
+
+TASK [tripleo-kernel : Set reboot required fact] *******************************
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.116)       0:00:27.487 ******** 
+skipping: [director-controller-0]
+
+TASK [Apply DPDK workarounds] **************************************************
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.120)       0:00:27.607 ******** 
+skipping: [director-controller-0]
+
+TASK [tripleo-module-load : Check whether /etc/modules-load.d exists] **********
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.119)       0:00:27.726 ******** 
+skipping: [director-controller-0]
+
+TASK [tripleo-module-load : Check whether /etc/modules-load.d exists] **********
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.116)       0:00:27.842 ******** 
+skipping: [director-controller-0]
+
+TASK [tripleo-module-load : Load modules] **************************************
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.119)       0:00:27.962 ******** 
+skipping: [director-controller-0] => (item=vfio_iommu_type1) 
+
+TASK [tripleo-module-load : Persist modules via modules-load.d] ****************
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.118)       0:00:28.081 ******** 
+skipping: [director-controller-0] => (item=vfio_iommu_type1) 
+
+TASK [tripleo-module-load : Drop module persistence] ***************************
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.119)       0:00:28.200 ******** 
+skipping: [director-controller-0] => (item=vfio_iommu_type1) 
+
+TASK [tripleo-module-load : Set modules persistence via /etc/modules] **********
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.117)       0:00:28.318 ******** 
+skipping: [director-controller-0] => (item=vfio_iommu_type1) 
+
+TASK [tripleo-kernel : Reboot and workaround block] ****************************
+Thursday 16 April 2020  23:30:05 -0400 (0:00:00.122)       0:00:28.440 ******** 
+skipping: [director-controller-0]
+
+TASK [create iptables service] *************************************************
+Thursday 16 April 2020  23:30:06 -0400 (0:00:00.116)       0:00:28.557 ******** 
+changed: [director-controller-0]
+
+
+TASK [create ip6tables service] ************************************************
+Thursday 16 April 2020  23:30:06 -0400 (0:00:00.599)       0:00:29.157 ******** 
+changed: [director-controller-0]
+
+TASK [enable tripleo-iptables service (and do a daemon-reload systemd)] ********
+Thursday 16 April 2020  23:30:07 -0400 (0:00:00.636)       0:00:29.793 ******** 
+changed: [director-controller-0]
+
+TASK [enable tripleo-ip6tables service] ****************************************
+Thursday 16 April 2020  23:30:07 -0400 (0:00:00.582)       0:00:30.376 ******** 
+changed: [director-controller-0]
+
+TASK [Check for Compute/deploy_steps_tasks_step0.yaml] *************************
+Thursday 16 April 2020  23:30:08 -0400 (0:00:00.487)       0:00:30.863 ******** 
+ok: [director-controller-0 -> localhost]
+
+TASK [include_tasks] ***********************************************************
+Thursday 16 April 2020  23:30:08 -0400 (0:00:00.270)       0:00:31.134 ******** 
+skipping: [director-controller-0]
+included: /var/lib/mistral/director/Compute/deploy_steps_tasks_step0.yaml for director-novacompute-0
+
+TASK [Configure tuned before reboot] *******************************************
+Thursday 16 April 2020  23:30:08 -0400 (0:00:00.275)       0:00:31.409 ******** 
+
+TASK [tuned : Gather variables for each operating system] **********************
+Thursday 16 April 2020  23:30:09 -0400 (0:00:00.188)       0:00:31.597 ******** 
+[DEPRECATION WARNING]: Use errors="ignore" instead of skip. This feature will 
+be removed in version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+ok: [director-novacompute-0] => (item=/usr/share/ansible/roles/tuned/vars/redhat.yml)
+
+TASK [tuned : include_tasks] ***************************************************
+Thursday 16 April 2020  23:30:09 -0400 (0:00:00.206)       0:00:31.804 ******** 
+included: /usr/share/ansible/roles/tuned/tasks/tuned_install.yml for director-novacompute-0
+
+TASK [tuned : Install tuned] ***************************************************
+Thursday 16 April 2020  23:30:09 -0400 (0:00:00.176)       0:00:31.981 ******** 
+ok: [director-novacompute-0]
+
+TASK [tuned : Check for tuned-adm] *********************************************
+Thursday 16 April 2020  23:30:10 -0400 (0:00:00.835)       0:00:32.817 ******** 
+ok: [director-novacompute-0]
+
+TASK [tuned : include_tasks] ***************************************************
+Thursday 16 April 2020  23:30:10 -0400 (0:00:00.273)       0:00:33.090 ******** 
+included: /usr/share/ansible/roles/tuned/tasks/tuned_config.yml for director-novacompute-0
+
+TASK [tuned : Ensure profile directory exists] *********************************
+Thursday 16 April 2020  23:30:10 -0400 (0:00:00.214)       0:00:33.305 ******** 
+skipping: [director-novacompute-0]
+
+TASK [tuned : Create custom tuned profile] *************************************
+Thursday 16 April 2020  23:30:10 -0400 (0:00:00.113)       0:00:33.419 ******** 
+skipping: [director-novacompute-0]
+
+TASK [tuned : Check tuned active profile] **************************************
+Thursday 16 April 2020  23:30:11 -0400 (0:00:00.113)       0:00:33.532 ******** 
+ok: [director-novacompute-0]
+
+TASK [tuned : Check Tuned Configuration file exists] ***************************
+Thursday 16 April 2020  23:30:11 -0400 (0:00:00.270)       0:00:33.802 ******** 
+ok: [director-novacompute-0]
+
+TASK [tuned : Fail if tuned profile conf is absent but isolated cores is provided] ***
+Thursday 16 April 2020  23:30:11 -0400 (0:00:00.267)       0:00:34.070 ******** 
+[DEPRECATION WARNING]: evaluating  as a bare variable, this behaviour will go 
+away and you might need to add |bool to the expression in the future. Also see 
+CONDITIONAL_BARE_VARS configuration toggle.. This feature will be removed in 
+version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+skipping: [director-novacompute-0]
+
+TASK [tuned : Configure isolated cores for profile virtual-host] ***************
+Thursday 16 April 2020  23:30:11 -0400 (0:00:00.115)       0:00:34.185 ******** 
+[DEPRECATION WARNING]: evaluating  as a bare variable, this behaviour will go 
+away and you might need to add |bool to the expression in the future. Also see 
+CONDITIONAL_BARE_VARS configuration toggle.. This feature will be removed in 
+version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+skipping: [director-novacompute-0]
+
+TASK [tuned : Enable tuned profile] ********************************************
+Thursday 16 April 2020  23:30:11 -0400 (0:00:00.117)       0:00:34.303 ******** 
+changed: [director-novacompute-0]
+
+TASK [Configure kernel args and reboot] ****************************************
+Thursday 16 April 2020  23:30:13 -0400 (0:00:01.435)       0:00:35.739 ******** 
+
+TASK [tripleo-kernel : Get the command line args of the node] ******************
+Thursday 16 April 2020  23:30:13 -0400 (0:00:00.202)       0:00:35.941 ******** 
+changed: [director-novacompute-0]
+
+TASK [tripleo-kernel : Ensure the kernel args (  ) is present as TRIPLEO_HEAT_TEMPLATE_KERNEL_ARGS] ***
+Thursday 16 April 2020  23:30:13 -0400 (0:00:00.337)       0:00:36.278 ******** 
+skipping: [director-novacompute-0]
+
+TASK [tripleo-kernel : Add TRIPLEO_HEAT_TEMPLATE_KERNEL_ARGS to the GRUB_CMDLINE_LINUX parameter] ***
+Thursday 16 April 2020  23:30:13 -0400 (0:00:00.113)       0:00:36.391 ******** 
+skipping: [director-novacompute-0]
+
+TASK [tripleo-kernel : Generate grub config file] ******************************
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.114)       0:00:36.505 ******** 
+skipping: [director-novacompute-0]
+
+TASK [tripleo-kernel : Set reboot required fact] *******************************
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.116)       0:00:36.622 ******** 
+skipping: [director-novacompute-0]
+
+TASK [Apply DPDK workarounds] **************************************************
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.124)       0:00:36.746 ******** 
+skipping: [director-novacompute-0]
+
+TASK [tripleo-module-load : Check whether /etc/modules-load.d exists] **********
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.115)       0:00:36.861 ******** 
+skipping: [director-novacompute-0]
+
+TASK [tripleo-module-load : Check whether /etc/modules-load.d exists] **********
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.113)       0:00:36.975 ******** 
+skipping: [director-novacompute-0]
+
+TASK [tripleo-module-load : Load modules] **************************************
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.113)       0:00:37.089 ******** 
+skipping: [director-novacompute-0] => (item=vfio_iommu_type1) 
+
+TASK [tripleo-module-load : Persist modules via modules-load.d] ****************
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.113)       0:00:37.203 ******** 
+skipping: [director-novacompute-0] => (item=vfio_iommu_type1) 
+
+TASK [tripleo-module-load : Drop module persistence] ***************************
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.114)       0:00:37.318 ******** 
+skipping: [director-novacompute-0] => (item=vfio_iommu_type1) 
+
+TASK [tripleo-module-load : Set modules persistence via /etc/modules] **********
+Thursday 16 April 2020  23:30:14 -0400 (0:00:00.118)       0:00:37.437 ******** 
+skipping: [director-novacompute-0] => (item=vfio_iommu_type1) 
+
+TASK [tripleo-kernel : Reboot and workaround block] ****************************
+Thursday 16 April 2020  23:30:15 -0400 (0:00:00.116)       0:00:37.554 ******** 
+skipping: [director-novacompute-0]
+
+TASK [create iptables service] *************************************************
+Thursday 16 April 2020  23:30:15 -0400 (0:00:00.113)       0:00:37.667 ******** 
+changed: [director-novacompute-0]
+
+TASK [create ip6tables service] ************************************************
+Thursday 16 April 2020  23:30:15 -0400 (0:00:00.579)       0:00:38.247 ******** 
+changed: [director-novacompute-0]
+
+TASK [enable tripleo-iptables service (and do a daemon-reload systemd)] ********
+Thursday 16 April 2020  23:30:16 -0400 (0:00:00.635)       0:00:38.883 ******** 
+changed: [director-novacompute-0]
+
+TASK [enable tripleo-ip6tables service] ****************************************
+Thursday 16 April 2020  23:30:17 -0400 (0:00:00.583)       0:00:39.466 ******** 
+changed: [director-novacompute-0]
+
+TASK [Check for BlockStorage/deploy_steps_tasks_step0.yaml] ********************
+Thursday 16 April 2020  23:30:17 -0400 (0:00:00.499)       0:00:39.965 ******** 
+ok: [director-controller-0 -> localhost]
+
+TASK [include_tasks] ***********************************************************
+Thursday 16 April 2020  23:30:17 -0400 (0:00:00.274)       0:00:40.240 ******** 
+skipping: [director-controller-0]
+skipping: [director-novacompute-0]
+
+TASK [Check for ObjectStorage/deploy_steps_tasks_step0.yaml] *******************
+Thursday 16 April 2020  23:30:17 -0400 (0:00:00.193)       0:00:40.433 ******** 
+ok: [director-controller-0 -> localhost]
+
+TASK [include_tasks] ***********************************************************
+Thursday 16 April 2020  23:30:18 -0400 (0:00:00.286)       0:00:40.720 ******** 
+skipping: [director-controller-0]
+skipping: [director-novacompute-0]
+
+TASK [Check for CephStorage/deploy_steps_tasks_step0.yaml] *********************
+Thursday 16 April 2020  23:30:18 -0400 (0:00:00.191)       0:00:40.911 ******** 
+ok: [director-controller-0 -> localhost]
+
+TASK [include_tasks] ***********************************************************
+Thursday 16 April 2020  23:30:18 -0400 (0:00:00.273)       0:00:41.185 ******** 
+skipping: [director-controller-0]
+skipping: [director-novacompute-0]
+
+PLAY [Server pre deployment steps] *********************************************
+
+TASK [Hiera config] ************************************************************
+Thursday 16 April 2020  23:30:18 -0400 (0:00:00.206)       0:00:41.391 ******** 
+
+TASK [tripleo-hieradata : Create /etc/puppet/hieradata] ************************
+Thursday 16 April 2020  23:30:19 -0400 (0:00:00.312)       0:00:41.703 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [tripleo-hieradata : Write hiera config] **********************************
+Thursday 16 April 2020  23:30:19 -0400 (0:00:00.345)       0:00:42.049 ******** 
+changed: [director-novacompute-0]
+changed: [director-controller-0]
+
+TASK [Hiera symlink] ***********************************************************
+Thursday 16 April 2020  23:30:20 -0400 (0:00:00.697)       0:00:42.747 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [Hieradata from vars] *****************************************************
+Thursday 16 April 2020  23:30:20 -0400 (0:00:00.351)       0:00:43.099 ******** 
+
+TASK [tripleo-hieradata : Copy overcloud.json to all_nodes.json] ***************
+Thursday 16 April 2020  23:30:20 -0400 (0:00:00.317)       0:00:43.417 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [tripleo-hieradata : Render hieradata from template] **********************
+Thursday 16 April 2020  23:30:21 -0400 (0:00:00.755)       0:00:44.172 ******** 
+changed: [director-controller-0] => (item=bootstrap_node)
+changed: [director-novacompute-0] => (item=bootstrap_node)
+changed: [director-controller-0] => (item=vip_data)
+changed: [director-novacompute-0] => (item=vip_data)
+changed: [director-novacompute-0] => (item=net_ip_map)
+changed: [director-controller-0] => (item=net_ip_map)
+changed: [director-novacompute-0] => (item=cloud_domain)
+changed: [director-controller-0] => (item=cloud_domain)
+changed: [director-novacompute-0] => (item=fqdn)
+changed: [director-controller-0] => (item=fqdn)
+changed: [director-novacompute-0] => (item=service_names)
+changed: [director-controller-0] => (item=service_names)
+changed: [director-novacompute-0] => (item=service_configs)
+changed: [director-controller-0] => (item=service_configs)
+changed: [director-novacompute-0] => (item=extraconfig)
+changed: [director-controller-0] => (item=extraconfig)
+changed: [director-novacompute-0] => (item=role_extraconfig)
+changed: [director-controller-0] => (item=role_extraconfig)
+
+PLAY [Server deployments] ******************************************************
+
+TASK [Server deployments] ******************************************************
+Thursday 16 April 2020  23:30:27 -0400 (0:00:06.109)       0:00:50.281 ******** 
+ok: [director-controller-0 -> localhost] => {
+    "msg": "Use --start-at-task \"Server deployments\" to resume from this task"
+}
+
+TASK [include_tasks] ***********************************************************
+Thursday 16 April 2020  23:30:27 -0400 (0:00:00.122)       0:00:50.404 ******** 
+
+TASK [Check for previous run of NetworkConfig] *********************************
+Thursday 16 April 2020  23:30:28 -0400 (0:00:00.235)       0:00:50.640 ******** 
+ok: [director-controller-0]
+ok: [director-novacompute-0]
+
+TASK [Check result of previous run of NetworkConfig] ***************************
+Thursday 16 April 2020  23:30:28 -0400 (0:00:00.351)       0:00:50.991 ******** 
+skipping: [director-controller-0]
+skipping: [director-novacompute-0]
+
+TASK [Check NetworkConfig script existence] ************************************
+Thursday 16 April 2020  23:30:28 -0400 (0:00:00.199)       0:00:51.191 ******** 
+ok: [director-controller-0 -> localhost]
+ok: [director-novacompute-0 -> localhost]
+
+TASK [Create /var/lib/tripleo-config/scripts directory] ************************
+Thursday 16 April 2020  23:30:29 -0400 (0:00:00.394)       0:00:51.585 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [Render NetworkConfig script] *********************************************
+Thursday 16 April 2020  23:30:29 -0400 (0:00:00.355)       0:00:51.941 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [Run NetworkConfig script] ************************************************
+Thursday 16 April 2020  23:30:30 -0400 (0:00:00.793)       0:00:52.734 ******** 
+changed: [director-novacompute-0]
+
+changed: [director-controller-0]
+
+TASK [Write rc of NetworkConfig script] ****************************************
+Thursday 16 April 2020  23:31:00 -0400 (0:00:29.759)       0:01:22.493 ******** 
+changed: [director-controller-0]
+changed: [director-novacompute-0]
+
+TASK [NetworkConfig stdout] ****************************************************
+Thursday 16 April 2020  23:31:00 -0400 (0:00:00.918)       0:01:23.412 ******** 
+ok: [director-controller-0] => {
+    "NetworkConfig_result.stderr_lines": [
+        "+ '[' -n '{\"network_config\": [{\"addresses\": [{\"ip_netmask\": \"172.168.1.7/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"domain\": [], \"mtu\": 1500, \"name\": \"nic1\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.1.56/24\"}], \"mtu\": 1500, \"name\": \"nic2\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.3.63/24\"}], \"mtu\": 1500, \"name\": \"nic3\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.2.108/24\"}], \"mtu\": 1500, \"name\": \"nic4\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.0.157/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"mtu\": 1500, \"name\": \"nic5\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"10.0.0.60/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"mtu\": 1500, \"name\": \"nic6\", \"routes\": [{\"default\": true, \"next_hop\": \"10.0.0.1\"}], \"type\": \"interface\", \"use_dhcp\": false}]}' ']'",
+        "+ '[' -z '' ']'",
+        "+ trap configure_safe_defaults EXIT",
+        "++ date +%Y-%m-%dT%H:%M:%S",
+        "+ DATETIME=2020-04-16T23:30:30",
+        "+ '[' -f /etc/os-net-config/config.json ']'",
+        "+ mkdir -p /etc/os-net-config",
+        "+ echo '{\"network_config\": [{\"addresses\": [{\"ip_netmask\": \"172.168.1.7/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"domain\": [], \"mtu\": 1500, \"name\": \"nic1\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.1.56/24\"}], \"mtu\": 1500, \"name\": \"nic2\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.3.63/24\"}], \"mtu\": 1500, \"name\": \"nic3\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.2.108/24\"}], \"mtu\": 1500, \"name\": \"nic4\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.0.157/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"mtu\": 1500, \"name\": \"nic5\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"10.0.0.60/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"mtu\": 1500, \"name\": \"nic6\", \"routes\": [{\"default\": true, \"next_hop\": \"10.0.0.1\"}], \"type\": \"interface\", \"use_dhcp\": false}]}'",
+        "++ type -t network_config_hook",
+        "+ '[' '' = function ']'",
+        "+ sed -i 's/: \"bridge_name/: \"br-ex/' /etc/os-net-config/config.json",
+        "+ sed -i s/interface_name/nic1/ /etc/os-net-config/config.json",
+        "+ set +e",
+        "+ os-net-config -c /etc/os-net-config/config.json -v --detailed-exit-codes",
+        "[2020/04/16 11:30:31 PM] [INFO] Using config file at: /etc/os-net-config/config.json",
+        "[2020/04/16 11:30:31 PM] [INFO] Ifcfg net config provider created.",
+        "[2020/04/16 11:30:31 PM] [INFO] Not using any mapping file.",
+        "[2020/04/16 11:30:31 PM] [INFO] Finding active nics",
+        "[2020/04/16 11:30:31 PM] [INFO] ens4 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens7 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens5 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens3 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] lo is not an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens8 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens6 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] No DPDK mapping available in path (/var/lib/os-net-config/dpdk_mapping.yaml)",
+        "[2020/04/16 11:30:31 PM] [INFO] Active nics are ['ens3', 'ens4', 'ens5', 'ens6', 'ens7', 'ens8']",
+        "[2020/04/16 11:30:31 PM] [INFO] nic2 mapped to: ens4",
+        "[2020/04/16 11:30:31 PM] [INFO] nic1 mapped to: ens3",
+        "[2020/04/16 11:30:31 PM] [INFO] nic5 mapped to: ens7",
+        "[2020/04/16 11:30:31 PM] [INFO] nic6 mapped to: ens8",
+        "[2020/04/16 11:30:31 PM] [INFO] nic3 mapped to: ens5",
+        "[2020/04/16 11:30:31 PM] [INFO] nic4 mapped to: ens6",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens3",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens4",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens5",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens6",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens7",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens8",
+        "[2020/04/16 11:30:31 PM] [INFO] adding custom route for interface: ens8",
+        "[2020/04/16 11:30:31 PM] [INFO] applying network configs...",
+        "[2020/04/16 11:30:31 PM] [INFO] running ifdown on interface: ens3",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens3 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifdown on interface: ens4",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens4 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifdown on interface: ens5",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens5 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifdown on interface: ens6",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens6 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifdown on interface: ens7",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens7 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifdown on interface: ens8",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens8 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens3",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens4",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens5",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens6",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens7",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens8",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/route-ens8",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifup on interface: ens3",
+        "[2020/04/16 11:30:36 PM] [INFO] running ifup on interface: ens4",
+        "[2020/04/16 11:30:40 PM] [INFO] running ifup on interface: ens5",
+        "[2020/04/16 11:30:45 PM] [INFO] running ifup on interface: ens6",
+        "[2020/04/16 11:30:49 PM] [INFO] running ifup on interface: ens7",
+        "[2020/04/16 11:30:53 PM] [INFO] running ifup on interface: ens8",
+        "+ RETVAL=2",
+        "+ set -e",
+        "+ [[ 2 == 2 ]]",
+        "+ '[' -f /etc/udev/rules.d/99-dhcp-all-interfaces.rules ']'",
+        "+ rm /etc/udev/rules.d/99-dhcp-all-interfaces.rules",
+        "+ '[' -f /usr/libexec/os-apply-config/templates/etc/os-net-config/config.json ']'",
+        "+ '[' -f /usr/libexec/os-apply-config/templates/etc/os-net-config/element_config.json ']'",
+        "+ configure_safe_defaults",
+        "+ [[ 0 == 0 ]]",
+        "+ return 0"
+    ],
+    "failed_when_result": false
+}
+ok: [director-novacompute-0] => {
+    "NetworkConfig_result.stderr_lines": [
+        "+ '[' -n '{\"network_config\": [{\"addresses\": [{\"ip_netmask\": \"172.168.1.9/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"domain\": [], \"mtu\": 1500, \"name\": \"nic1\", \"routes\": [{\"default\": true, \"next_hop\": \"172.168.1.10\"}], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.1.130/24\"}], \"mtu\": 1500, \"name\": \"nic2\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.2.4/24\"}], \"mtu\": 1500, \"name\": \"nic4\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.0.217/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"mtu\": 1500, \"name\": \"nic5\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"dns_servers\": [\"192.168.4.1\"], \"mtu\": 1500, \"name\": \"nic6\", \"type\": \"interface\", \"use_dhcp\": false}]}' ']'",
+        "+ '[' -z '' ']'",
+        "+ trap configure_safe_defaults EXIT",
+        "++ date +%Y-%m-%dT%H:%M:%S",
+        "+ DATETIME=2020-04-16T23:30:30",
+        "+ '[' -f /etc/os-net-config/config.json ']'",
+        "+ mkdir -p /etc/os-net-config",
+        "+ echo '{\"network_config\": [{\"addresses\": [{\"ip_netmask\": \"172.168.1.9/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"domain\": [], \"mtu\": 1500, \"name\": \"nic1\", \"routes\": [{\"default\": true, \"next_hop\": \"172.168.1.10\"}], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.1.130/24\"}], \"mtu\": 1500, \"name\": \"nic2\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.2.4/24\"}], \"mtu\": 1500, \"name\": \"nic4\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"addresses\": [{\"ip_netmask\": \"172.16.0.217/24\"}], \"dns_servers\": [\"192.168.4.1\"], \"mtu\": 1500, \"name\": \"nic5\", \"routes\": [], \"type\": \"interface\", \"use_dhcp\": false}, {\"dns_servers\": [\"192.168.4.1\"], \"mtu\": 1500, \"name\": \"nic6\", \"type\": \"interface\", \"use_dhcp\": false}]}'",
+        "++ type -t network_config_hook",
+        "+ '[' '' = function ']'",
+        "+ sed -i 's/: \"bridge_name/: \"br-ex/' /etc/os-net-config/config.json",
+        "+ sed -i s/interface_name/nic1/ /etc/os-net-config/config.json",
+        "+ set +e",
+        "+ os-net-config -c /etc/os-net-config/config.json -v --detailed-exit-codes",
+        "[2020/04/16 11:30:31 PM] [INFO] Using config file at: /etc/os-net-config/config.json",
+        "[2020/04/16 11:30:31 PM] [INFO] Ifcfg net config provider created.",
+        "[2020/04/16 11:30:31 PM] [INFO] Not using any mapping file.",
+        "[2020/04/16 11:30:31 PM] [INFO] Finding active nics",
+        "[2020/04/16 11:30:31 PM] [INFO] ens7 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens5 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens3 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens8 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] lo is not an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens6 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] ens4 is an active nic",
+        "[2020/04/16 11:30:31 PM] [INFO] No DPDK mapping available in path (/var/lib/os-net-config/dpdk_mapping.yaml)",
+        "[2020/04/16 11:30:31 PM] [INFO] Active nics are ['ens3', 'ens4', 'ens5', 'ens6', 'ens7', 'ens8']",
+        "[2020/04/16 11:30:31 PM] [INFO] nic2 mapped to: ens4",
+        "[2020/04/16 11:30:31 PM] [INFO] nic6 mapped to: ens8",
+        "[2020/04/16 11:30:31 PM] [INFO] nic1 mapped to: ens3",
+        "[2020/04/16 11:30:31 PM] [INFO] nic3 mapped to: ens5",
+        "[2020/04/16 11:30:31 PM] [INFO] nic5 mapped to: ens7",
+        "[2020/04/16 11:30:31 PM] [INFO] nic4 mapped to: ens6",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens3",
+        "[2020/04/16 11:30:31 PM] [INFO] adding custom route for interface: ens3",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens4",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens6",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens7",
+        "[2020/04/16 11:30:31 PM] [INFO] adding interface: ens8",
+        "[2020/04/16 11:30:31 PM] [INFO] applying network configs...",
+        "[2020/04/16 11:30:31 PM] [INFO] running ifdown on interface: ens3",
+        "[2020/04/16 11:30:31 PM] [INFO] interface ens3 is up, trying with ip command",
+        "[2020/04/16 11:30:31 PM] [INFO] running ifdown on interface: ens4",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens4 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifdown on interface: ens6",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens6 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifdown on interface: ens7",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens7 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifdown on interface: ens8",
+        "[2020/04/16 11:30:32 PM] [INFO] interface ens8 is up, trying with ip command",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens3",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/route-ens3",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens4",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens6",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens7",
+        "[2020/04/16 11:30:32 PM] [INFO] Writing config /etc/sysconfig/network-scripts/ifcfg-ens8",
+        "[2020/04/16 11:30:32 PM] [INFO] running ifup on interface: ens3",
+        "[2020/04/16 11:30:36 PM] [INFO] running ifup on interface: ens4",
+        "[2020/04/16 11:30:40 PM] [INFO] running ifup on interface: ens6",
+        "[2020/04/16 11:30:44 PM] [INFO] running ifup on interface: ens7",
+        "[2020/04/16 11:30:49 PM] [INFO] running ifup on interface: ens8",
+        "+ RETVAL=2",
+        "+ set -e",
+        "+ [[ 2 == 2 ]]",
+        "+ '[' -f /etc/udev/rules.d/99-dhcp-all-interfaces.rules ']'",
+        "+ rm /etc/udev/rules.d/99-dhcp-all-interfaces.rules",
+        "+ '[' -f /usr/libexec/os-apply-config/templates/etc/os-net-config/config.json ']'",
+        "+ '[' -f /usr/libexec/os-apply-config/templates/etc/os-net-config/element_config.json ']'",
+        "+ configure_safe_defaults",
+        "+ [[ 0 == 0 ]]",
+        "+ return 0"
+    ],
+    "failed_when_result": false
+}
+
+TASK [Ensure network service is enabled] ***************************************
+Thursday 16 April 2020  23:31:01 -0400 (0:00:00.245)       0:01:23.657 ******** 
+ok: [director-controller-0]
+ok: [director-novacompute-0]
+
+TASK [AllNodesValidationConfig] ************************************************
+Thursday 16 April 2020  23:31:01 -0400 (0:00:00.575)       0:01:24.233 ******** 
+changed: [director-novacompute-0]
+fatal: [director-controller-0]: FAILED! => {"changed": true, "msg": "non-zero return code", "rc": 1, "stderr": "Shared connection to 172.168.1.7 closed.\r\n", "stderr_lines": ["Shared connection to 172.168.1.7 closed."], "stdout": "Trying to ping default gateway 10.0.0.1...Ping to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nPing to 10.0.0.1 failed. Retrying...\r\nFAILURE\r\n10.0.0.1 is not pingable.\r\n", "stdout_lines": ["Trying to ping default gateway 10.0.0.1...Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "Ping to 10.0.0.1 failed. Retrying...", "FAILURE", "10.0.0.1 is not pingable."]}
+Overcloud configuration failed.
+
+
+NO MORE HOSTS LEFT *************************************************************
+
+PLAY RECAP *********************************************************************
+director-controller-0      : ok=57   changed=27   unreachable=0    failed=1    skipped=25   rescued=0    ignored=0   
+director-novacompute-0     : ok=54   changed=28   unreachable=0    failed=0    skipped=25   rescued=0    ignored=0   
+undercloud                 : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Thursday 16 April 2020  23:41:33 -0400 (0:10:31.344)       0:11:55.577 ******** 
+=============================================================================== 
+
+Ansible failed, check log at /var/lib/mistral/director/ansible.log.
